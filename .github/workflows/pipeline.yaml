@@ -1,0 +1,50 @@
+name: package-deploy
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+package:
+    name: "package"
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout source code
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Create BUILD directory and copy necessary application files
+        run: |
+          mkdir BUILD
+          cp -r assets BUILD/assets  # copy the static directory and contents
+          cp -r index.html BUILD/index.html  # copy the templates directory and contents
+          cp -r inner-page.html BUILD/inner-page.html
+
+      - name: Upload artifact for deployment jobs
+        uses: actions/upload-artifact@v2
+        with:
+          name: portfolio_website
+          path: |
+            ./BUILD
+  deploy:
+    runs-on: ubuntu-latest
+    needs: package
+    environment:
+      name: "Production"
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: portfolio_website
+          path: .
+
+      - name: "Deploy to Azure Web App"
+        uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
+        with:
+          app-name: "flask-tests"
+          slot-name: "Production"
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_WITTY_WATER_008BADA10 }}
