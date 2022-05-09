@@ -30,7 +30,7 @@ I completed this portfolio website as part of a final project for a course. This
 
 
 ## Screenshots
-![E](C:\Users\npras\Pictures\portfolio_website_image.png)
+![image](https://github.com/noah-prasad/portfolio_website/blob/main/portfolio_website_image.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
