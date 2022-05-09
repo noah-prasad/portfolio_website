@@ -30,7 +30,7 @@ I completed this portfolio website as part of a final project for a course. This
 
 
 ## Screenshots
-![Example screenshot](C:\Users\npras\Picturesportfolio_website_image.png)
+![E](C:\Users\npras\Pictures\portfolio_website_image.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
